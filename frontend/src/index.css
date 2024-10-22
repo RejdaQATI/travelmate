@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    background-color: #fcfcfc; 
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; 
+  }
+
+
+.selected-range {
+    background-color: #c0c0c0 !important; 
+    color: white !important;
+  }
+  
+
+  @media (max-width: 414px) {
+    .swiper-slide-custom {
+      margin-left: -10px !important;
+      margin-right: -10px !important;
+      padding-left: 12px !important;
+      padding-right: 2.5px !important;
+
+    }
+  }
+  
+
+.logo {
+  height: 60px;  
+}

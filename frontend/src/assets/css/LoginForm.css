@@ -1,0 +1,61 @@
+
+.plane-animation {
+    position: absolute;
+    width: 100%; 
+    top: 1%; 
+    left: -30%;
+    z-index: 3;
+    animation: fly 25s infinite linear;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.plane-animation:after {
+    display: block;
+    padding-top: 20%; 
+    content: '';
+}
+
+@keyframes fly {
+    100% {
+        transform: translateX(-100vw);
+    }
+    0% {
+        transform: translateX(100vw); 
+    }
+}
+
+.cloud-animation {
+    position: absolute;
+    width: 60%; 
+    top: 3%;
+    z-index: 1; 
+    animation: clouds 100s infinite linear;
+    animation-delay: -20s;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cloud-animation:after {
+    display: block;
+    padding-top: 35%; 
+    content: '';
+}
+
+.cloud-animation-2 {
+    opacity: 1;
+    top: 6%; 
+    animation-delay: -55s;
+    animation-duration: 120s; 
+}
+
+@keyframes clouds {
+    100% {
+        transform: translateX(-100vw);
+    }
+    0% {
+        transform: translateX(100vw); 
+    }
+}
