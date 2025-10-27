@@ -16,17 +16,22 @@ services:
       - db-network
 
   backend:
-    build: ./backend
+    image: rejdaqati/travel-mate-backend:${TAG}
     restart: unless-stopped
     ports:
-      - "8000:80"
+      - "8000:80"   
     environment:
-        MYSQL_DATABASE: ${DB_DATABASE}
-        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-       # MYSQL_PASSWORD: ${DB_PASSWORD}
-       # MYSQL_USER: ${DB_USERNAME}
-       # MYSQL_PORT: ${DB_PORT}
-#    command: bash -c "sleep 10 && php artisan migrate --seed && apache2-foreground"
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY} 
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     depends_on:
       - db
     networks:
@@ -34,12 +39,13 @@ services:
       - db-network
 
   frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
+    image: rejdaqati/travel-mate-frontend:${TAG}
+    #ports:
+    # - "3000:80"
     networks:
       - app-network
+    environment:
+      VITE_API_URL: "/api"
 
   certbot:
    image: certbot/certbot
@@ -69,8 +75,6 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - /etc/letsencrypt/live/travelmate.ovh/fullchain.pem:/etc/ssl/certs/travelmate.crt
-      - /etc/letsencrypt/live/travelmate.ovh/privkey.pem:/etc/ssl/private/travelmate.key
     depends_on:
       - backend
       - frontend
